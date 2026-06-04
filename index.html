@@ -16,16 +16,21 @@
   --border:   rgba(99,179,237,0.1);
   --border2:  rgba(99,179,237,0.22);
 
-  /* Three-colour accent system */
+  /* Accent colours */
   --ml:       #3b82f6;   /* blue  — ML projects */
   --chml:     #a855f7;   /* violet — ChemE+ML */
   --che:      #10b981;   /* emerald — ChemE */
+  --da:       #f59e0b;   /* amber  — Data Analytics */
+  
   --ml-dim:   rgba(59,130,246,0.08);
   --chml-dim: rgba(168,85,247,0.08);
   --che-dim:  rgba(16,185,129,0.08);
+  --da-dim:   rgba(245,158,11,0.08);
+  
   --ml-border:   rgba(59,130,246,0.2);
   --chml-border: rgba(168,85,247,0.2);
   --che-border:  rgba(16,185,129,0.2);
+  --da-border:   rgba(245,158,11,0.2);
 
   --accent:   #63b3ed;   /* global accent (light blue) */
   --text:     #dce9f5;
@@ -207,10 +212,12 @@ h2 {
 .cat-pill.ml   { background: var(--ml-dim);   color: var(--ml);   border: 1px solid var(--ml-border); }
 .cat-pill.chml { background: var(--chml-dim); color: var(--chml); border: 1px solid var(--chml-border); }
 .cat-pill.che  { background: var(--che-dim);  color: var(--che);  border: 1px solid var(--che-border); }
+.cat-pill.da   { background: var(--da-dim);   color: var(--da);   border: 1px solid var(--da-border); }
 .cat-rule { flex: 1; height: 1px; }
 .cat-rule.ml   { background: var(--ml-border); }
 .cat-rule.chml { background: var(--chml-border); }
 .cat-rule.che  { background: var(--che-border); }
+.cat-rule.da   { background: var(--da-border); }
 
 .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
 .projects-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
@@ -228,11 +235,13 @@ h2 {
 .project-card.ml::before   { background: var(--ml); }
 .project-card.chml::before { background: linear-gradient(90deg, var(--chml), var(--ml)); }
 .project-card.che::before  { background: var(--che); }
+.project-card.da::before   { background: var(--da); }
 
 .project-card:hover { transform: translateY(-4px); }
 .project-card.ml:hover   { border-color: var(--ml-border); }
 .project-card.chml:hover { border-color: var(--chml-border); }
 .project-card.che:hover  { border-color: var(--che-border); }
+.project-card.da:hover   { border-color: var(--da-border); }
 .project-card:hover::before { transform: scaleX(1); }
 
 .project-num { font-size: 10px; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 0.9rem; }
@@ -248,6 +257,7 @@ h2 {
 .project-metric.ml   { color: var(--ml);   background: var(--ml-dim);   border: 1px solid var(--ml-border); }
 .project-metric.chml { color: var(--chml); background: var(--chml-dim); border: 1px solid var(--chml-border); }
 .project-metric.che  { color: var(--che);  background: var(--che-dim);  border: 1px solid var(--che-border); }
+.project-metric.da   { color: var(--da);   background: var(--da-dim);   border: 1px solid var(--da-border); }
 .project-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 0.75rem; }
 .tag {
   font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
@@ -344,6 +354,7 @@ footer span { font-size: 11px; color: var(--muted); }
 .legend-dot.ml   { background: var(--ml); }
 .legend-dot.chml { background: var(--chml); }
 .legend-dot.che  { background: var(--che); }
+.legend-dot.da   { background: var(--da); }
 
 /* ANIMATIONS */
 .fade-up { opacity: 0; transform: translateY(22px); transition: opacity 0.55s, transform 0.55s; }
@@ -473,9 +484,10 @@ footer span { font-size: 11px; color: var(--muted); }
     <div class="legend-item"><span class="legend-dot ml"></span>Machine Learning</div>
     <div class="legend-item"><span class="legend-dot chml"></span>ChemE + ML (Hybrid)</div>
     <div class="legend-item"><span class="legend-dot che"></span>Chemical Engineering</div>
+    <div class="legend-item"><span class="legend-dot da"></span>Data Analytics</div>
   </div>
 
-  <!-- ChemE + ML — Hybrid (unchanged) -->
+  <!-- ChemE + ML — Hybrid -->
   <div class="cat-label fade-up">
     <span class="cat-pill chml">⬡ ChemE + ML — Hybrid</span>
     <div class="cat-rule chml"></div>
@@ -501,13 +513,12 @@ footer span { font-size: 11px; color: var(--muted); }
     </a>
   </div>
 
-  <!-- Machine Learning (with new projects added) -->
+  <!-- Machine Learning (pure ML) -->
   <div class="cat-label fade-up">
     <span class="cat-pill ml">◉ Machine Learning</span>
     <div class="cat-rule ml"></div>
   </div>
   <div class="projects-grid fade-up">
-    <!-- Existing ML projects -->
     <a class="project-card ml" href="https://github.com/uttkarshyadavv/bulldozer-price-regression" target="_blank">
       <p class="project-num">REGRESSION</p>
       <p class="project-title">Bulldozer Price Prediction</p>
@@ -535,46 +546,40 @@ footer span { font-size: 11px; color: var(--muted); }
         <span class="tag">TensorFlow</span><span class="tag">Transfer Learning</span><span class="tag">CNN</span>
       </div>
     </a>
+  </div>
 
-    <!-- NEW ML / DATA PROJECTS -->
-    <a class="project-card ml" href="https://github.com/uttkarshyadavv/data-jobs-dashboard" target="_blank">
+  <!-- Data Analytics (new separate section) -->
+  <div class="cat-label fade-up">
+    <span class="cat-pill da">◉ Data Analytics</span>
+    <div class="cat-rule da"></div>
+  </div>
+  <div class="projects-grid fade-up">
+    <a class="project-card da" href="https://github.com/uttkarshyadavv/data-jobs-dashboard" target="_blank">
       <p class="project-num">POWER BI</p>
       <p class="project-title">Data Jobs Dashboard</p>
       <p class="project-desc">Interactive Power BI dashboard analyzing global data job trends, salary insights, and hiring patterns. Built with Power Query and DAX for data-driven career insights.</p>
-      <span class="project-metric ml">Interactive Dashboard</span>
+      <span class="project-metric da">Interactive Dashboard</span>
       <div class="project-tags">
         <span class="tag">Power BI</span><span class="tag">DAX</span><span class="tag">Power Query</span><span class="tag">Data Analytics</span>
       </div>
     </a>
-    <a class="project-card ml" href="https://github.com/uttkarshyadavv/SQL-Project" target="_blank">
+    <a class="project-card da" href="https://github.com/uttkarshyadavv/SQL-Project" target="_blank">
       <p class="project-num">SQL ANALYSIS</p>
       <p class="project-title">Data Job Market Analysis</p>
       <p class="project-desc">Comprehensive SQL analysis of 2023 data analyst job postings — uncovering top-paying roles, most in-demand skills, and the optimal skill set to maximize career value using PostgreSQL.</p>
-      <span class="project-metric ml">5 Key Insights</span>
+      <span class="project-metric da">5 Key Insights</span>
       <div class="project-tags">
         <span class="tag">PostgreSQL</span><span class="tag">SQL</span><span class="tag">Data Analysis</span><span class="tag">Career Analytics</span>
       </div>
     </a>
   </div>
 
-  <!-- Chemical Engineering (with new projects added) -->
+  <!-- Chemical Engineering -->
   <div class="cat-label fade-up">
     <span class="cat-pill che">⬢ Chemical Engineering</span>
     <div class="cat-rule che"></div>
   </div>
   <div class="projects-grid-2 fade-up">
-    <!-- Existing ChemE projects -->
-    <a class="project-card che" href="https://github.com/uttkarshyadavv/control-system-stability-threshold" target="_blank">
-      <p class="project-num">PROCESS CONTROL</p>
-      <p class="project-title">Control Systems Analysis — Scilab</p>
-      <p class="project-desc">Root locus construction, Routh-Hurwitz stability analysis, and Laplace transform modelling of chemical process control loops in Scilab.</p>
-      <span class="project-metric che">Scilab · Control Theory</span>
-      <div class="project-tags">
-        <span class="tag">Scilab</span><span class="tag">Laplace</span><span class="tag">Root Locus</span><span class="tag">Routh-Hurwitz</span>
-      </div>
-    </a>
-   
-    <!-- NEW PURE CHEMICAL ENGINEERING PROJECTS -->
     <a class="project-card che" href="https://github.com/uttkarshyadavv/control-system-stability-threshold" target="_blank">
       <p class="project-num">PROCESS CONTROL</p>
       <p class="project-title">Control System Stability Threshold</p>
@@ -623,7 +628,7 @@ footer span { font-size: 11px; color: var(--muted); }
   </div>
 </section>
 
-<!-- SKILLS (unchanged) -->
+<!-- SKILLS -->
 <section id="skills">
   <div class="section-header">
     <span class="section-tag">03 — Skills</span>
@@ -677,7 +682,7 @@ footer span { font-size: 11px; color: var(--muted); }
   </div>
 </section>
 
-<!-- EXPERIENCE (unchanged) -->
+<!-- EXPERIENCE -->
 <section id="experience">
   <div class="section-header">
     <span class="section-tag">04 — Experience</span>
@@ -717,7 +722,7 @@ footer span { font-size: 11px; color: var(--muted); }
   </div>
 </section>
 
-<!-- CONTACT (unchanged) -->
+<!-- CONTACT -->
 <section id="contact">
   <div class="section-header">
     <span class="section-tag">05 — Contact</span>
