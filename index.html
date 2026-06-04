@@ -21,16 +21,19 @@
   --chml:     #a855f7;   /* violet — ChemE+ML */
   --che:      #10b981;   /* emerald — ChemE */
   --da:       #f59e0b;   /* amber  — Data Analytics */
+  --dsa:      #ef4444;   /* red    — DSA / Coding Practice */
   
   --ml-dim:   rgba(59,130,246,0.08);
   --chml-dim: rgba(168,85,247,0.08);
   --che-dim:  rgba(16,185,129,0.08);
   --da-dim:   rgba(245,158,11,0.08);
+  --dsa-dim:  rgba(239,68,68,0.08);
   
   --ml-border:   rgba(59,130,246,0.2);
   --chml-border: rgba(168,85,247,0.2);
   --che-border:  rgba(16,185,129,0.2);
   --da-border:   rgba(245,158,11,0.2);
+  --dsa-border:  rgba(239,68,68,0.2);
 
   --accent:   #63b3ed;   /* global accent (light blue) */
   --text:     #dce9f5;
@@ -213,11 +216,13 @@ h2 {
 .cat-pill.chml { background: var(--chml-dim); color: var(--chml); border: 1px solid var(--chml-border); }
 .cat-pill.che  { background: var(--che-dim);  color: var(--che);  border: 1px solid var(--che-border); }
 .cat-pill.da   { background: var(--da-dim);   color: var(--da);   border: 1px solid var(--da-border); }
+.cat-pill.dsa  { background: var(--dsa-dim);  color: var(--dsa);  border: 1px solid var(--dsa-border); }
 .cat-rule { flex: 1; height: 1px; }
 .cat-rule.ml   { background: var(--ml-border); }
 .cat-rule.chml { background: var(--chml-border); }
 .cat-rule.che  { background: var(--che-border); }
 .cat-rule.da   { background: var(--da-border); }
+.cat-rule.dsa  { background: var(--dsa-border); }
 
 .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
 .projects-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
@@ -236,12 +241,14 @@ h2 {
 .project-card.chml::before { background: linear-gradient(90deg, var(--chml), var(--ml)); }
 .project-card.che::before  { background: var(--che); }
 .project-card.da::before   { background: var(--da); }
+.project-card.dsa::before  { background: var(--dsa); }
 
 .project-card:hover { transform: translateY(-4px); }
 .project-card.ml:hover   { border-color: var(--ml-border); }
 .project-card.chml:hover { border-color: var(--chml-border); }
 .project-card.che:hover  { border-color: var(--che-border); }
 .project-card.da:hover   { border-color: var(--da-border); }
+.project-card.dsa:hover  { border-color: var(--dsa-border); }
 .project-card:hover::before { transform: scaleX(1); }
 
 .project-num { font-size: 10px; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 0.9rem; }
@@ -258,6 +265,7 @@ h2 {
 .project-metric.chml { color: var(--chml); background: var(--chml-dim); border: 1px solid var(--chml-border); }
 .project-metric.che  { color: var(--che);  background: var(--che-dim);  border: 1px solid var(--che-border); }
 .project-metric.da   { color: var(--da);   background: var(--da-dim);   border: 1px solid var(--da-border); }
+.project-metric.dsa  { color: var(--dsa);  background: var(--dsa-dim);  border: 1px solid var(--dsa-border); }
 .project-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 0.75rem; }
 .tag {
   font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
@@ -355,6 +363,7 @@ footer span { font-size: 11px; color: var(--muted); }
 .legend-dot.chml { background: var(--chml); }
 .legend-dot.che  { background: var(--che); }
 .legend-dot.da   { background: var(--da); }
+.legend-dot.dsa  { background: var(--dsa); }
 
 /* ANIMATIONS */
 .fade-up { opacity: 0; transform: translateY(22px); transition: opacity 0.55s, transform 0.55s; }
@@ -401,16 +410,16 @@ footer span { font-size: 11px; color: var(--muted); }
       <span class="stat-label">GATE 2026 AIR</span>
     </div>
     <div class="stat-item">
-      <span class="stat-num s-acc">7.71</span>
-      <span class="stat-label">CGPA</span>
+      <span class="stat-num s-acc">97.2%</span>
+      <span class="stat-label">10th Grade</span>
     </div>
     <div class="stat-item">
-      <span class="stat-num s-chml">97/100</span>
-      <span class="stat-label">NPTEL AI Score</span>
+      <span class="stat-num s-acc">85%</span>
+      <span class="stat-label">12th Grade</span>
     </div>
     <div class="stat-item">
-      <span class="stat-num s-che">Top 1%</span>
-      <span class="stat-label">Nationally</span>
+      <span class="stat-num s-che">82</span>
+      <span class="stat-label">LeetCode Solved</span>
     </div>
   </div>
   <div class="hero-cta">
@@ -440,11 +449,11 @@ footer span { font-size: 11px; color: var(--muted); }
           <p class="cred-sub">Chemical Engineering · Top 0.5%</p>
         </div>
       </li>
-      <li class="credential-item c-chml">
-        <span class="cred-icon chml">◈</span>
+      <li class="credential-item c-acc">
+        <span class="cred-icon acc">◈</span>
         <div>
-          <p class="cred-title">NPTEL — AI in Drug Discovery</p>
-          <p class="cred-sub">97/100 · Top 1% Nationally</p>
+          <p class="cred-title">LeetCode</p>
+          <p class="cred-sub">82 Problems Solved · 40 Easy + 40 Medium + 2 Hard</p>
         </div>
       </li>
       <li class="credential-item c-ml">
@@ -485,6 +494,7 @@ footer span { font-size: 11px; color: var(--muted); }
     <div class="legend-item"><span class="legend-dot chml"></span>ChemE + ML (Hybrid)</div>
     <div class="legend-item"><span class="legend-dot che"></span>Chemical Engineering</div>
     <div class="legend-item"><span class="legend-dot da"></span>Data Analytics</div>
+    <div class="legend-item"><span class="legend-dot dsa"></span>DSA / Coding Practice</div>
   </div>
 
   <!-- ChemE + ML — Hybrid -->
@@ -548,7 +558,7 @@ footer span { font-size: 11px; color: var(--muted); }
     </a>
   </div>
 
-  <!-- Data Analytics (new separate section) -->
+  <!-- Data Analytics -->
   <div class="cat-label fade-up">
     <span class="cat-pill da">◉ Data Analytics</span>
     <div class="cat-rule da"></div>
@@ -574,12 +584,38 @@ footer span { font-size: 11px; color: var(--muted); }
     </a>
   </div>
 
+  <!-- DSA / Coding Practice (New Section) -->
+  <div class="cat-label fade-up">
+    <span class="cat-pill dsa">◉ DSA / Coding Practice</span>
+    <div class="cat-rule dsa"></div>
+  </div>
+  <div class="projects-grid fade-up">
+    <a class="project-card dsa" href="https://github.com/uttkarshyadavv/daily-coding-practice" target="_blank">
+      <p class="project-num">DSA PRACTICE</p>
+      <p class="project-title">Daily Coding Practice</p>
+      <p class="project-desc">Consistent daily coding to strengthen programming fundamentals and DSA skills. Solutions across arrays, strings, recursion, sorting, sliding window, trees, graphs, greedy algorithms, and bit manipulation.</p>
+      <span class="project-metric dsa">Python · DSA</span>
+      <div class="project-tags">
+        <span class="tag">Python</span><span class="tag">Data Structures</span><span class="tag">Algorithms</span><span class="tag">Problem Solving</span>
+      </div>
+    </a>
+  </div>
+
   <!-- Chemical Engineering -->
   <div class="cat-label fade-up">
     <span class="cat-pill che">⬢ Chemical Engineering</span>
     <div class="cat-rule che"></div>
   </div>
   <div class="projects-grid-2 fade-up">
+    <a class="project-card che" href="https://github.com/uttkarshyadavv/control-system-stability-threshold" target="_blank">
+      <p class="project-num">PROCESS CONTROL</p>
+      <p class="project-title">Control Systems Analysis — Scilab</p>
+      <p class="project-desc">Root locus construction, Routh-Hurwitz stability analysis, and Laplace transform modelling of chemical process control loops in Scilab.</p>
+      <span class="project-metric che">Scilab · Control Theory</span>
+      <div class="project-tags">
+        <span class="tag">Scilab</span><span class="tag">Laplace</span><span class="tag">Root Locus</span><span class="tag">Routh-Hurwitz</span>
+      </div>
+    </a>
     <a class="project-card che" href="https://github.com/uttkarshyadavv/control-system-stability-threshold" target="_blank">
       <p class="project-num">PROCESS CONTROL</p>
       <p class="project-title">Control System Stability Threshold</p>
@@ -733,6 +769,7 @@ footer span { font-size: 11px; color: var(--muted); }
     <p>Open to ML/AI internships, data analytics roles, and ChemE+AI hybrid opportunities. GATE 2026 AIR 256 — also exploring M.Tech and research paths.</p>
     <div class="contact-links">
       <a class="contact-link" href="https://github.com/uttkarshyadavv" target="_blank">⌥ GitHub</a>
+      <a class="contact-link" href="https://leetcode.com/u/uttkarshyadavv/" target="_blank">⌥ LeetCode</a>
       <a class="contact-link" href="https://linkedin.com/in/utkarsh-yadavv" target="_blank">⌥ LinkedIn</a>
       <a class="contact-link" href="mailto:the.utkarshofficial@gmail.com">⌥ Email</a>
     </div>
