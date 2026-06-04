@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Utkarsh Yadav — ML Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:       #06080e;
+  --bg2:      #090d15;
+  --surface:  #0f1520;
+  --surface2: #141d2e;
+  --border:   rgba(99,179,237,0.1);
+  --border2:  rgba(99,179,237,0.22);
+
+  /* Three-colour accent system */
+  --ml:       #3b82f6;   /* blue  — ML projects */
+  --chml:     #a855f7;   /* violet — ChemE+ML */
+  --che:      #10b981;   /* emerald — ChemE */
+  --ml-dim:   rgba(59,130,246,0.08);
+  --chml-dim: rgba(168,85,247,0.08);
+  --che-dim:  rgba(16,185,129,0.08);
+  --ml-border:   rgba(59,130,246,0.2);
+  --chml-border: rgba(168,85,247,0.2);
+  --che-border:  rgba(16,185,129,0.2);
+
+  --accent:   #63b3ed;   /* global accent (light blue) */
+  --text:     #dce9f5;
+  --muted:    #5a7494;
+  --muted2:   #7a98b8;
+  --mono:     'Space Mono', monospace;
+  --display:  'Syne', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* Scanlines */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.025) 2px, rgba(0,0,0,0.025) 4px);
+  pointer-events: none; z-index: 1000;
+}
+
+/* Dot grid bg */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: radial-gradient(circle, rgba(99,179,237,0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none; z-index: 0;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 4rem;
+  background: rgba(6,8,14,0.88);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: var(--display); font-size: 1rem; font-weight: 800;
+  color: var(--accent); letter-spacing: -0.02em; text-decoration: none;
+}
+.nav-logo span { color: var(--muted2); }
+nav ul { list-style: none; display: flex; gap: 2.5rem; }
+nav ul a {
+  color: var(--muted2); text-decoration: none;
+  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  transition: color 0.2s;
+}
+nav ul a:hover { color: var(--accent); }
+
+/* SECTIONS */
+section {
+  position: relative; z-index: 1;
+  max-width: 1080px; margin: 0 auto; padding: 0 3rem;
+}
+
+/* HERO */
+#hero {
+  min-height: 100vh; display: flex; flex-direction: column;
+  justify-content: center; padding-top: 5rem;
+  max-width: 100%; padding-left: 8%; padding-right: 8%;
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 1.75rem;
+}
+.hero-tag::before {
+  content: ''; display: inline-block; width: 28px; height: 1px; background: var(--accent);
+}
+h1 {
+  font-family: var(--display);
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  font-weight: 800; line-height: 0.93; letter-spacing: -0.03em;
+  margin-bottom: 2rem;
+}
+h1 .line1 { color: var(--text); display: block; }
+h1 .line2 {
+  display: block;
+  background: linear-gradient(100deg, var(--ml), var(--chml));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-sub {
+  max-width: 540px; color: var(--muted2);
+  font-size: 14px; line-height: 1.85; margin-bottom: 3rem;
+}
+.hero-stats { display: flex; gap: 3.5rem; margin-bottom: 3rem; }
+.stat-item { display: flex; flex-direction: column; }
+.stat-num {
+  font-family: var(--display); font-size: 2rem; font-weight: 800;
+  line-height: 1;
+}
+.stat-num.s-ml   { color: var(--ml); }
+.stat-num.s-chml { color: var(--chml); }
+.stat-num.s-che  { color: var(--che); }
+.stat-num.s-acc  { color: var(--accent); }
+
+.stat-label {
+  font-size: 10px; color: var(--muted); letter-spacing: 0.08em;
+  text-transform: uppercase; margin-top: 5px;
+}
+.hero-cta { display: flex; gap: 1rem; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 0.7rem 1.6rem; font-family: var(--mono);
+  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  text-decoration: none; border-radius: 3px; transition: all 0.2s;
+  cursor: pointer; border: none;
+}
+.btn-primary { background: var(--ml); color: #fff; font-weight: 700; }
+.btn-primary:hover { background: #60a5fa; transform: translateY(-2px); }
+.btn-ghost { background: transparent; color: var(--accent); border: 1px solid var(--border2); }
+.btn-ghost:hover { background: rgba(99,179,237,0.06); transform: translateY(-2px); }
+
+/* SECTION HEADINGS */
+.section-header {
+  display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2.75rem;
+}
+.section-tag {
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent);
+  white-space: nowrap;
+}
+.section-line { flex: 1; height: 1px; background: var(--border); }
+h2 {
+  font-family: var(--display); font-size: 2.4rem; font-weight: 800;
+  letter-spacing: -0.03em; color: var(--text); margin-bottom: 1rem;
+}
+
+/* ABOUT */
+#about { padding-top: 8rem; padding-bottom: 8rem; }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.about-text p { color: var(--muted2); margin-bottom: 1.2rem; line-height: 1.9; }
+.about-text p strong { font-weight: 400; }
+.strong-ml   { color: var(--ml); }
+.strong-chml { color: var(--chml); }
+.strong-che  { color: var(--che); }
+.credential-list { list-style: none; display: flex; flex-direction: column; gap: 0.9rem; }
+.credential-item {
+  display: flex; gap: 1rem; align-items: flex-start;
+  padding: 0.9rem 1.1rem;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 3px; transition: border-color 0.2s;
+}
+.credential-item:hover { border-color: var(--border2); }
+.credential-item.c-ml   { border-left: 3px solid var(--ml); }
+.credential-item.c-chml { border-left: 3px solid var(--chml); }
+.credential-item.c-che  { border-left: 3px solid var(--che); }
+.credential-item.c-acc  { border-left: 3px solid var(--accent); }
+.cred-icon { font-size: 16px; flex-shrink: 0; margin-top: 2px; }
+.cred-icon.ml   { color: var(--ml); }
+.cred-icon.chml { color: var(--chml); }
+.cred-icon.che  { color: var(--che); }
+.cred-icon.acc  { color: var(--accent); }
+.cred-title { font-size: 13px; color: var(--text); font-weight: 700; }
+.cred-sub   { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+/* PROJECTS */
+#projects { padding-bottom: 8rem; }
+
+/* Category label row */
+.cat-label {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 1.25rem; margin-top: 2.5rem;
+}
+.cat-label:first-of-type { margin-top: 0; }
+.cat-pill {
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  font-weight: 700; padding: 4px 12px; border-radius: 20px;
+}
+.cat-pill.ml   { background: var(--ml-dim);   color: var(--ml);   border: 1px solid var(--ml-border); }
+.cat-pill.chml { background: var(--chml-dim); color: var(--chml); border: 1px solid var(--chml-border); }
+.cat-pill.che  { background: var(--che-dim);  color: var(--che);  border: 1px solid var(--che-border); }
+.cat-rule { flex: 1; height: 1px; }
+.cat-rule.ml   { background: var(--ml-border); }
+.cat-rule.chml { background: var(--chml-border); }
+.cat-rule.che  { background: var(--che-border); }
+
+.projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.projects-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+
+.project-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 3px; padding: 1.6rem; position: relative; overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+  text-decoration: none; display: block; color: inherit;
+}
+.project-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+}
+.project-card.ml::before   { background: var(--ml); }
+.project-card.chml::before { background: linear-gradient(90deg, var(--chml), var(--ml)); }
+.project-card.che::before  { background: var(--che); }
+
+.project-card:hover { transform: translateY(-4px); }
+.project-card.ml:hover   { border-color: var(--ml-border); }
+.project-card.chml:hover { border-color: var(--chml-border); }
+.project-card.che:hover  { border-color: var(--che-border); }
+.project-card:hover::before { transform: scaleX(1); }
+
+.project-num { font-size: 10px; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 0.9rem; }
+.project-title {
+  font-family: var(--display); font-size: 1rem; font-weight: 700;
+  color: var(--text); margin-bottom: 0.65rem; line-height: 1.3;
+}
+.project-desc { font-size: 12px; color: var(--muted2); line-height: 1.7; margin-bottom: 1rem; }
+.project-metric {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; padding: 3px 10px; border-radius: 3px; margin-bottom: 0.9rem;
+}
+.project-metric.ml   { color: var(--ml);   background: var(--ml-dim);   border: 1px solid var(--ml-border); }
+.project-metric.chml { color: var(--chml); background: var(--chml-dim); border: 1px solid var(--chml-border); }
+.project-metric.che  { color: var(--che);  background: var(--che-dim);  border: 1px solid var(--che-border); }
+.project-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 0.75rem; }
+.tag {
+  font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase;
+  color: var(--muted); background: var(--bg2);
+  border: 1px solid var(--border); padding: 3px 7px; border-radius: 2px;
+}
+
+/* SKILLS */
+#skills { padding-bottom: 8rem; }
+.skills-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; }
+.skill-group {
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 1.4rem; border-radius: 3px;
+}
+.skill-group-title {
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.skill-group-title.ml   { color: var(--ml); }
+.skill-group-title.chml { color: var(--chml); }
+.skill-group-title.che  { color: var(--che); }
+.skill-group-title.acc  { color: var(--accent); }
+.skill-items { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.skill-items li {
+  font-size: 13px; color: var(--muted2);
+  display: flex; align-items: center; gap: 8px;
+}
+.skill-items li.ml::before   { content: '▸'; color: var(--ml);   font-size: 9px; }
+.skill-items li.chml::before { content: '▸'; color: var(--chml); font-size: 9px; }
+.skill-items li.che::before  { content: '▸'; color: var(--che);  font-size: 9px; }
+.skill-items li.acc::before  { content: '▸'; color: var(--accent); font-size: 9px; }
+
+/* EXPERIENCE */
+#experience { padding-bottom: 8rem; }
+.exp-list { display: flex; flex-direction: column; gap: 1.25rem; }
+.exp-item {
+  display: grid; grid-template-columns: 190px 1fr; gap: 2rem;
+  padding: 1.6rem; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 3px; position: relative;
+}
+.exp-item::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 3px; border-radius: 3px 0 0 3px;
+}
+.exp-item.e-ml::before   { background: var(--ml); }
+.exp-item.e-che::before  { background: var(--che); }
+.exp-item.e-acc::before  { background: var(--accent); }
+.exp-date { font-size: 11px; color: var(--muted); letter-spacing: 0.05em; margin-top: 2px; }
+.exp-org  { font-size: 11px; margin-top: 4px; letter-spacing: 0.04em; }
+.exp-org.ml  { color: var(--ml); }
+.exp-org.che { color: var(--che); }
+.exp-org.acc { color: var(--accent); }
+.exp-title { font-family: var(--display); font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
+.exp-desc  { font-size: 13px; color: var(--muted2); line-height: 1.8; }
+
+/* CONTACT */
+#contact { padding-bottom: 8rem; text-align: center; }
+.contact-inner { max-width: 600px; margin: 0 auto; }
+.contact-inner p { color: var(--muted2); margin-bottom: 2.5rem; line-height: 1.9; }
+.contact-links { display: flex; justify-content: center; gap: 1.25rem; flex-wrap: wrap; }
+.contact-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 0.55rem 1.3rem; font-family: var(--mono);
+  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--muted2); text-decoration: none;
+  border: 1px solid var(--border); border-radius: 3px; transition: all 0.2s;
+}
+.contact-link:hover { color: var(--accent); border-color: var(--border2); background: rgba(99,179,237,0.04); }
+
+/* FOOTER */
+footer {
+  position: relative; z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 2rem 8%; display: flex; justify-content: space-between; align-items: center;
+}
+footer span { font-size: 11px; color: var(--muted); }
+.cursor-dot {
+  display: inline-block; width: 6px; height: 6px;
+  background: var(--accent); border-radius: 50%; margin-left: 4px;
+  animation: blink 1.2s steps(1) infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+/* LEGEND */
+.legend {
+  display: flex; gap: 1.5rem; margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+.legend-item {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 11px; color: var(--muted2); letter-spacing: 0.05em;
+}
+.legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+.legend-dot.ml   { background: var(--ml); }
+.legend-dot.chml { background: var(--chml); }
+.legend-dot.che  { background: var(--che); }
+
+/* ANIMATIONS */
+.fade-up { opacity: 0; transform: translateY(22px); transition: opacity 0.55s, transform 0.55s; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+  nav ul { display: none; }
+  #hero { padding-left: 5%; padding-right: 5%; }
+  section { padding: 0 1.5rem; }
+  .about-grid, .projects-grid, .projects-grid-2, .skills-grid { grid-template-columns: 1fr; }
+  .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+  .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
+  footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">UY<span>.</span></a>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <p class="hero-tag">ML Engineer · Chemical Engineering · SVNIT Surat</p>
+  <h1>
+    <span class="line1">Utkarsh</span>
+    <span class="line2">Yadav</span>
+  </h1>
+  <p class="hero-sub">
+    B.Tech Chemical Engineering student building intelligent systems at the intersection of process engineering and machine learning. GATE 2026 AIR 256.
+  </p>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <span class="stat-num s-ml">256</span>
+      <span class="stat-label">GATE 2026 AIR</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num s-acc">7.71</span>
+      <span class="stat-label">CGPA</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num s-chml">97/100</span>
+      <span class="stat-label">NPTEL AI Score</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num s-che">Top 1%</span>
+      <span class="stat-label">Nationally</span>
+    </div>
+  </div>
+  <div class="hero-cta">
+    <a href="#projects" class="btn btn-primary">View Projects</a>
+    <a href="#contact" class="btn btn-ghost">Get In Touch</a>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header">
+    <span class="section-tag">01 — About</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text fade-up">
+      <h2>Building at the<br>intersection.</h2>
+      <p>I'm a Chemical Engineering student at <strong class="strong-acc" style="color:var(--accent)">SVNIT Surat</strong> (2023–2027) who took the less-travelled path — pairing process engineering fundamentals with a self-built ML stack.</p>
+      <p>My edge is context. I understand <strong class="strong-che">distillation columns, heat exchangers, and reactor dynamics</strong> well enough to build predictive maintenance models that actually make sense to plant engineers.</p>
+      <p>Beyond hybrid roles, I'm actively building toward <strong class="strong-ml">ML/AI engineering</strong> positions — with a portfolio spanning classical ML, deep learning, analytics, and LLM engineering.</p>
+    </div>
+    <ul class="credential-list fade-up">
+      <li class="credential-item c-ml">
+        <span class="cred-icon ml">◈</span>
+        <div>
+          <p class="cred-title">GATE 2026 — AIR 256</p>
+          <p class="cred-sub">Chemical Engineering · Top 0.5%</p>
+        </div>
+      </li>
+      <li class="credential-item c-chml">
+        <span class="cred-icon chml">◈</span>
+        <div>
+          <p class="cred-title">NPTEL — AI in Drug Discovery</p>
+          <p class="cred-sub">97/100 · Top 1% Nationally</p>
+        </div>
+      </li>
+      <li class="credential-item c-ml">
+        <span class="cred-icon ml">◈</span>
+        <div>
+          <p class="cred-title">ZTM ML & Data Science Bootcamp</p>
+          <p class="cred-sub">Neagoie / Bourke · incl. TensorFlow</p>
+        </div>
+      </li>
+      <li class="credential-item c-chml">
+        <span class="cred-icon chml">◈</span>
+        <div>
+          <p class="cred-title">Ed Donner's LLM Engineering Course</p>
+          <p class="cred-sub">Frontier APIs · RAG · Agents</p>
+        </div>
+      </li>
+      <li class="credential-item c-acc">
+        <span class="cred-icon acc">◈</span>
+        <div>
+          <p class="cred-title">Power BI — Data Jobs Dashboard</p>
+          <p class="cred-sub">Published on GitHub · Analytics capstone</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <span class="section-tag">02 — Projects</span>
+    <div class="section-line"></div>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend fade-up">
+    <div class="legend-item"><span class="legend-dot ml"></span>Machine Learning</div>
+    <div class="legend-item"><span class="legend-dot chml"></span>ChemE + ML (Hybrid)</div>
+    <div class="legend-item"><span class="legend-dot che"></span>Chemical Engineering</div>
+  </div>
+
+  <!-- ChemE + ML -->
+  <div class="cat-label fade-up">
+    <span class="cat-pill chml">⬡ ChemE + ML — Hybrid</span>
+    <div class="cat-rule chml"></div>
+  </div>
+  <div class="projects-grid-2 fade-up">
+    <a class="project-card chml" href="https://github.com/uttkarshyadavv" target="_blank">
+      <p class="project-num">HERO PROJECT</p>
+      <p class="project-title">Distillation Column Predictive Maintenance</p>
+      <p class="project-desc">DWSIM-simulated process data fed into a Random Forest classifier for real-time fault detection. ChemE domain knowledge baked directly into feature engineering — the rare kind of ML project that makes sense to a process engineer.</p>
+      <span class="project-metric chml">⬡ ChemE + ML</span>
+      <div class="project-tags">
+        <span class="tag">Python</span><span class="tag">Random Forest</span><span class="tag">DWSIM</span><span class="tag">Scikit-learn</span>
+      </div>
+    </a>
+    <a class="project-card chml" href="https://github.com/uttkarshyadavv" target="_blank">
+      <p class="project-num">HYBRID</p>
+      <p class="project-title">Heat Exchanger Predictive Maintenance</p>
+      <p class="project-desc">Sensor-driven anomaly detection for shell-and-tube heat exchangers. Combined process engineering intuition on fouling and failure modes with ML-based early-warning classification.</p>
+      <span class="project-metric chml">⬡ ChemE + ML</span>
+      <div class="project-tags">
+        <span class="tag">Anomaly Detection</span><span class="tag">Scikit-learn</span><span class="tag">Feature Eng.</span>
+      </div>
+    </a>
+  </div>
+
+  <!-- ML -->
+  <div class="cat-label fade-up">
+    <span class="cat-pill ml">◉ Machine Learning</span>
+    <div class="cat-rule ml"></div>
+  </div>
+  <div class="projects-grid fade-up">
+    <a class="project-card ml" href="https://github.com/uttkarshyadavv" target="_blank">
+      <p class="project-num">REGRESSION</p>
+      <p class="project-title">Bulldozer Price Prediction</p>
+      <p class="project-desc">End-to-end regression pipeline on Kaggle's Blue Book dataset. Extensive feature engineering on temporal and categorical variables with Random Forest.</p>
+      <span class="project-metric ml">R² = 0.88</span>
+      <div class="project-tags">
+        <span class="tag">Random Forest</span><span class="tag">Pandas</span><span class="tag">Kaggle</span>
+      </div>
+    </a>
+    <a class="project-card ml" href="https://github.com/uttkarshyadavv" target="_blank">
+      <p class="project-num">CLASSIFICATION</p>
+      <p class="project-title">Heart Disease Prediction</p>
+      <p class="project-desc">Binary classification on clinical data with cross-validated logistic regression. Interpretable model with medical feature analysis and ROC-AUC evaluation.</p>
+      <span class="project-metric ml">Accuracy 88.52%</span>
+      <div class="project-tags">
+        <span class="tag">Logistic Regression</span><span class="tag">Cross-validation</span><span class="tag">ROC-AUC</span>
+      </div>
+    </a>
+    <a class="project-card ml" href="https://github.com/uttkarshyadavv" target="_blank">
+      <p class="project-num">DEEP LEARNING</p>
+      <p class="project-title">Dog Breed Classification</p>
+      <p class="project-desc">Transfer learning with MobileNetV2 across 120 breeds. Fine-tuned on custom dataset with data augmentation; trained end-to-end in TensorFlow.</p>
+      <span class="project-metric ml">MobileNetV2</span>
+      <div class="project-tags">
+        <span class="tag">TensorFlow</span><span class="tag">Transfer Learning</span><span class="tag">CNN</span>
+      </div>
+    </a>
+  </div>
+
+  <!-- ChemE -->
+  <div class="cat-label fade-up">
+    <span class="cat-pill che">⬢ Chemical Engineering</span>
+    <div class="cat-rule che"></div>
+  </div>
+  <div class="projects-grid-2 fade-up">
+    <a class="project-card che" href="https://github.com/uttkarshyadavv" target="_blank">
+      <p class="project-num">PROCESS CONTROL</p>
+      <p class="project-title">Control Systems Analysis — Scilab</p>
+      <p class="project-desc">Root locus construction, Routh-Hurwitz stability analysis, and Laplace transform modelling of chemical process control loops in Scilab.</p>
+      <span class="project-metric che">Scilab · Control Theory</span>
+      <div class="project-tags">
+        <span class="tag">Scilab</span><span class="tag">Laplace</span><span class="tag">Root Locus</span><span class="tag">Routh-Hurwitz</span>
+      </div>
+    </a>
+    <a class="project-card che" href="https://github.com/uttkarshyadavv" target="_blank">
+      <p class="project-num">PLANT DESIGN</p>
+      <p class="project-title">Process Utilities & Plant Layout</p>
+      <p class="project-desc">Plant location analysis, equipment selection, depreciation modelling, and process utilities design as part of SVNIT coursework and IFFCO plant exposure.</p>
+      <span class="project-metric che">Plant Engineering</span>
+      <div class="project-tags">
+        <span class="tag">Plant Layout</span><span class="tag">Equipment Selection</span><span class="tag">Depreciation</span>
+      </div>
+    </a>
+  </div>
+
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <span class="section-tag">03 — Skills</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid fade-up">
+    <div class="skill-group">
+      <p class="skill-group-title ml">ML / AI</p>
+      <ul class="skill-items">
+        <li class="ml">Scikit-learn</li>
+        <li class="ml">TensorFlow / Keras</li>
+        <li class="ml">Random Forest</li>
+        <li class="ml">XGBoost</li>
+        <li class="ml">Transfer Learning</li>
+        <li class="ml">LLM Engineering</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <p class="skill-group-title acc">Data & Analytics</p>
+      <ul class="skill-items">
+        <li class="acc">Python / Pandas</li>
+        <li class="acc">NumPy / Matplotlib</li>
+        <li class="acc">SQL</li>
+        <li class="acc">Power BI / DAX</li>
+        <li class="acc">Streamlit</li>
+        <li class="acc">Jupyter</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <p class="skill-group-title che">ChemE Domain</p>
+      <ul class="skill-items">
+        <li class="che">DWSIM Simulation</li>
+        <li class="che">Process Control</li>
+        <li class="che">Scilab / Root Locus</li>
+        <li class="che">Plant Design</li>
+        <li class="che">Unit Operations</li>
+        <li class="che">Equipment Selection</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <p class="skill-group-title chml">Dev & Tools</p>
+      <ul class="skill-items">
+        <li class="chml">Git / GitHub</li>
+        <li class="chml">LaTeX</li>
+        <li class="chml">RAG Pipelines</li>
+        <li class="chml">API Integration</li>
+        <li class="chml">Markdown / Docs</li>
+        <li class="chml">VS Code</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <span class="section-tag">04 — Experience</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="exp-list">
+    <div class="exp-item e-che fade-up">
+      <div>
+        <p class="exp-date">Summer 2025</p>
+        <p class="exp-org che">ONGC</p>
+      </div>
+      <div>
+        <p class="exp-title">Engineering Intern</p>
+        <p class="exp-desc">Selected internship at ONGC — India's largest oil & gas company. Applied process engineering and data analysis skills in an industrial upstream energy context.</p>
+      </div>
+    </div>
+    <div class="exp-item e-che fade-up">
+      <div>
+        <p class="exp-date">Previous</p>
+        <p class="exp-org che">IFFCO Phulpur</p>
+      </div>
+      <div>
+        <p class="exp-title">Plant Operations Intern</p>
+        <p class="exp-desc">Hands-on exposure to ammonia and urea production plant operations at one of India's largest fertiliser complexes. Ground-level understanding of large-scale chemical process control and safety systems.</p>
+      </div>
+    </div>
+    <div class="exp-item e-acc fade-up">
+      <div>
+        <p class="exp-date">Ongoing</p>
+        <p class="exp-org acc">SVNIT Surat</p>
+      </div>
+      <div>
+        <p class="exp-title">B.Tech Chemical Engineering</p>
+        <p class="exp-desc">CGPA 7.71 · Batch 2023–2027. Running a parallel ML/AI learning track alongside core ChemE coursework — building toward ML/AI and ChemE+AI hybrid roles in placement season.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <span class="section-tag">05 — Contact</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="contact-inner fade-up">
+    <h2>Let's build<br>something.</h2>
+    <p>Open to ML/AI internships, data analytics roles, and ChemE+AI hybrid opportunities. GATE 2026 AIR 256 — also exploring M.Tech and research paths.</p>
+    <div class="contact-links">
+      <a class="contact-link" href="https://github.com/uttkarshyadavv" target="_blank">⌥ GitHub</a>
+      <a class="contact-link" href="https://linkedin.com/in/utkarsh-yadavv" target="_blank">⌥ LinkedIn</a>
+      <a class="contact-link" href="mailto:the.utkarshofficial@gmail.com">⌥ Email</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2025 Utkarsh Yadav<span class="cursor-dot"></span></span>
+  <span>SVNIT Surat · ChemE + ML</span>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 70);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const el = document.querySelector(a.getAttribute('href'));
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+</body>
+</html>
